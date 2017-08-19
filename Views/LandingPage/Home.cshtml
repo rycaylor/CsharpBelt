@@ -27,7 +27,7 @@
             @{
                 foreach(var auction in @ViewBag.auctions)
                 {
-                    @if(auction.TimeLeft.Hours >= 0 && auction.TimeLeft.Days >= 0)
+                    @if(auction.TimeLeft.Hours > 0 || auction.TimeLeft.Days > 0)
                     {
                     <tr>
                         <td><a href="/show/@auction.Id">@auction.Name</a></td>
