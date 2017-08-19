@@ -1,0 +1,58 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    @{
+       var user = @ViewBag.user;
+    }
+    <h1>Current Auctions</h1>
+    <h3>Hi @user.FirstName</h3>
+    <h3>Your Wallet: @user.Wallet.ToString("0.00")</h3>
+    <a href="/logout">Sign Out</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Seller</th>
+                <th>Top Bid</th>
+                <th>Time Remaining</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach(var auction in @ViewBag.auctions)
+                {
+                    @if(auction.TimeLeft.Hours >= 0 && auction.TimeLeft.Days >= 0)
+                    {
+                    <tr>
+                        <td><a href="/show/@auction.Id">@auction.Name</a></td>
+                        <td>@auction.User.FirstName</td>
+                        <td>@auction.Bid.ToString("0.00")</td>
+                        @if(auction.TimeLeft.Hours < 24 && auction.TimeLeft.Days == 0)
+                        {
+                            <td>@auction.TimeLeft.Hours hours</td>
+                        }
+                        else
+                        {
+                            <td>@auction.TimeLeft.Days days</td>
+                        }
+                        @if(auction.UserId == user.Id)
+                        {
+                            <td><a href="/delete/@auction.Id">delete</a></td>
+                        }
+                    </tr>
+                    }
+
+                }
+            }
+        </tbody>
+
+    </table>
+    <a href="createAuction">New Auction</a>
+</body>
+</html>

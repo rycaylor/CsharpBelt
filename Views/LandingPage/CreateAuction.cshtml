@@ -1,0 +1,71 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Create An Auction</h1>
+    <a href="home">Home</a>
+    <a href="/logout">Logout</a>
+    @{
+        var user = @ViewBag.user;
+    }
+    @model blackbelt.Models.Auction
+    <form asp-action="NewAuction" asp-controller="LandingPage">
+        <table>
+            <tr>
+                <td>
+                    <label for="">Product Name</label>
+                </td>
+                <td>
+                    <input asp-for="Name">
+                </td>
+                <td>
+                    <span asp-validation-for="Name"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="">Description</label>
+                </td>
+                <td>
+                    <textarea asp-for="Description" placeholder="Description" cols=80></textarea>
+                </td>
+                <td>
+                    <span asp-validation-for="Description"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="">Starting Bid</label>
+                </td>
+                <td>
+                    Money<input asp-for="Bid" type="number" min="0" step="any">
+                </td>
+                <td>
+                    <span asp-validation-for="Bid"></span>
+                </td>
+                    <td>@ViewBag.BidStatus</td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="">End Date</label>
+                </td>
+                <td>
+                    <input asp-for="EndingDate" type="date">
+                </td>
+                <td>
+                    <span asp-validation-for="EndingDate"></span>
+                </td>
+                 <td>@ViewBag.DateStatus</td>
+            
+
+            </tr>
+            <input type= "hidden" asp-for="UserId" value="@user.Id">
+        </table>
+    <input type="submit" value="Add Auction">
+</form>
+</body>
+</html>

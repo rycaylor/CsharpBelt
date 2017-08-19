@@ -1,0 +1,56 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    @{
+        var user = @ViewBag.user;
+        var auction = @ViewBag.auction;
+        var bidder = @ViewBag.bidder;
+    }
+    <a href="/home">Home</a>
+    <a href="/logout">Logout</a>
+    <h1>@auction.Name</h1>
+    <h3>created by: @auction.User.FirstName</h3>
+    @{
+        if(auction.TimeLeft.Hours < 24 && auction.TimeLeft.Days == 0)
+        {
+            <td> Time Left: @auction.TimeLeft.Hours hours</td>
+        }
+        else
+        {
+            <td>Time Left: @auction.TimeLeft.Days days</td>
+        }
+    }
+
+    <h4>@auction.Description</h4>
+
+    @{
+        if(bidder == null)
+        {
+            <h4>No one has bid on this item be the First!!!</h4>
+            <h4>The Minimum Bid For this item is @auction.Bid</h4>
+        }
+        else
+        {
+            <h4>The current bidder is @bidder.User.FirstName</h4>
+            <h4>The Bid AMount is @auction.Bid</h4>
+        }
+    }
+    @{
+        if(@ViewBag.error != null)
+        {
+            <h1>@ViewBag.error</h1>
+        }
+    }
+    <form action="/makebid/@auction.Id" method="post" >
+        <input type= "hidden" value="@user.Id" name="user">
+        <input type="number" min="@auction.Bid" step="any" name="bidUpdate">
+        <input type="submit" value="Make A Bid!">
+    </form>
+</body>
+</html>

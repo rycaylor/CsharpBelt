@@ -1,0 +1,74 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<h1>Please Register an Account</h1>
+
+@model blackbelt.Models.User
+    <form asp-controller="Home" asp-action="Validate" method="post">
+        <table>
+            <tr>
+                <td>
+                    <label for="">First Name</label>
+                    <input asp-for="FirstName"/>
+                </td>
+                <td>
+                    <span asp-validation-for="FirstName"></span>
+                 </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="">Last Name</label>
+                    <input asp-for="LastName"/>
+                </td>
+                <td>
+                    <span asp-validation-for="LastName"></span>
+                 </td>
+            </tr>
+             <tr>
+                <td>
+                    <label for="">User Name</label>
+                    <input asp-for="UserName"/>
+                </td>
+                <td>
+                    <span asp-validation-for="UserName"></span>
+                 </td>
+                 <td>
+                     @{
+                         if(ViewBag.error != null){
+                             <span> @ViewBag.error </span>
+                         }
+                     }
+                 </td>
+            </tr> 
+            <tr>
+                <td>
+                    <label for="">Password</label>
+                    <input asp-for="Password"/>
+                </td>
+                <td>
+                    <span asp-validation-for="Password"></span>
+                 </td>
+            </tr>
+             <tr>
+                <td>
+                    <label for="">Password Confirmation</label>
+                    <input asp-for="PasswordConfirmation" type="Password"/>
+                </td>
+                <td>
+                    <span asp-validation-for="PasswordConfirmation"></span>
+                 </td>
+            </tr>
+        </table>
+        <button type="submit">Create new User</button>
+    </form>
+
+    <h3>Already Have an Account?</h3>
+    <a href="login">Login</a>
+</body>
+</html>

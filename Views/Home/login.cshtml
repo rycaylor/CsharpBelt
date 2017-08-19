@@ -1,0 +1,41 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Login</h1>
+
+    @model blackbelt.Models.User
+    <form asp-controller="Home" asp-action="Log" method="post">
+        <table>
+             <tr>
+                <td>
+                    <label for="">User Name</label>
+                    <input asp-for="UserName"/>
+                </td>
+
+                 <td>
+                    @{
+                        if(ViewBag.error != null){
+                            <span> @ViewBag.error </span>
+                        }
+                    }
+                 </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="">Password</label>
+                    <input asp-for="Password"/>
+                </td>
+            </tr>
+        </table>
+    <button type="submit">Login</button>
+    </form>
+    <a href="/">Register</a>
+
+
+</body>
+</html>
